@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Opportunity Radar | Dear Future Luminary</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Overlock:wght@400;700&family=Changa+One&family=Kalam&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      /* Light Theme */
+      --primary-bg: #f8f9fa;
+      --secondary-bg: #ffffff;
+      --text-color: #2c3e50;
+      --accent-color: #6a3093;
+      --accent-light: #a044ff;
+      --highlight: #f1c40f;
+      --card-bg: #ffffff;
+      --card-shadow: rgba(0, 0, 0, 0.1);
+      --nav-bg: rgba(255, 255, 255, 0.9);
+      --hero-bg: linear-gradient(135deg, #6a3093 0%, #a044ff 100%);
+      --footer-bg: #2c3e50;
+      --star-color: rgba(106, 48, 147, 0.2);
+      --section-bg: #ffffff;
+    }
+
+    /* Dark Theme */
+    [data-theme="dark"] {
+      --primary-bg: #0f0e17;
+      --secondary-bg: #1a1a2e;
+      --text-color: #e6e6e6;
+      --accent-color: #a044ff;
+      --accent-light: #bb86fc;
+      --highlight: #f1c40f;
+      --card-bg: #1a1a2e;
+      --card-shadow: rgba(0, 0, 0, 0.3);
+      --nav-bg: rgba(15, 14, 23, 0.9);
+      --hero-bg: linear-gradient(135deg, #1a1a2e 0%, #0f0e17 100%);
+      --footer-bg: #0f0e17;
+      --star-color: rgba(255, 255, 255, 0.1);
+      --section-bg: #1a1a2e;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body {
+      font-family: 'Overlock', cursive;
+      background-color: var(--primary-bg);
+      color: var(--text-color);
+      line-height: 1.6;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(var(--star-color) 1px, transparent 1px),
+        radial-gradient(var(--star-color) 1px, transparent 1px);
+      background-size: 30px 30px;
+      background-position: 0 0, 15px 15px;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* Navigation */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 5%;
+      background-color: var(--nav-bg);
+      backdrop-filter: blur(10px);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      font-family: 'Changa One', cursive;
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--accent-color);
+      text-shadow: 0 0 10px rgba(160, 68, 255, 0.3);
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+    }
+
+    .nav-links li {
+      margin-left: 2rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-color);
+      font-weight: bold;
+      font-size: 1.1rem;
+      position: relative;
+      padding: 0.5rem 0;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--accent-light);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-light);
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      height: 80vh;
+      margin-top: 80px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .hero-bg-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      transition: opacity 0.5s ease;
+    }
+
+    .light-image {
+      opacity: 1;
+    }
+
+    .dark-image {
+      opacity: 0;
+    }
+
+    [data-theme="dark"] .light-image {
+      opacity: 0;
+    }
+
+    [data-theme="dark"] .dark-image {
+      opacity: 1;
+    }
+
+    .hero-content {
+      animation: fadeInUp 1s ease;
+      color: white;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      max-width: 800px;
+      padding: 0 2rem;
+    }
+
+    .hero h1 {
+      font-family: 'Changa One', cursive;
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      color: white;
+    }
+
+    .slogan {
+      font-family: 'Kalam', cursive;
+      font-size: 1.5rem;
+      color: white;
+    }
+
+    /* Main Content */
+    .section-container {
+      padding: 4rem 5%;
+      background-color: var(--primary-bg);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .opportunity-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+
+    .opportunity-card {
+      background-color: var(--card-bg);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px var(--card-shadow);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .opportunity-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px var(--card-shadow);
+    }
+
+    .opportunity-image-container {
+      height: 200px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f5f5f5;
+    }
+
+    .opportunity-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background-color: white;
+      padding: 10px;
+    }
+
+    .opportunity-details {
+      padding: 1.5rem;
+      border-top: 3px solid var(--accent-color);
+    }
+
+    .opportunity-details p {
+      margin-bottom: 0.8rem;
+      font-size: 1rem;
+    }
+
+    .opportunity-details strong {
+      color: var(--accent-light);
+    }
+
+    .channel-name {
+      font-weight: bold;
+      color: var(--text-color);
+    }
+
+    .opportunity-link {
+      color: var(--highlight);
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .opportunity-link:hover {
+      color: var(--accent-light);
+    }
+
+    /* Footer */
+    .footer {
+      background-color: var(--footer-bg);
+      color: white;
+      text-align: center;
+      padding: 2.5rem 0;
+      font-size: 1rem;
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .social-icons a {
+      color: white;
+      background-color: var(--accent-color);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+
+    .social-icons a:hover {
+      background-color: var(--accent-light);
+      transform: translateY(-3px);
+    }
+
+    /* Back to Top Button */
+    #myBtn {
+      display: none;
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 99;
+      border: none;
+      outline: none;
+      background-color: var(--accent-color);
+      color: white;
+      cursor: pointer;
+      padding: 15px;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 15px rgba(106, 48, 147, 0.3);
+      transition: all 0.3s;
+    }
+
+    #myBtn:hover {
+      background-color: var(--accent-light);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(160, 68, 255, 0.4);
+    }
+
+    /* Theme Toggle */
+    .theme-toggle {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      z-index: 99;
+      background-color: var(--accent-color);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 15px rgba(106, 48, 147, 0.3);
+      transition: all 0.3s;
+    }
+
+    .theme-toggle:hover {
+      background-color: var(--accent-light);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(160, 68, 255, 0.4);
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+      100% {
+        transform: translateY(0px);
+      }
+    }
+
+    @keyframes twinkle {
+      0% { opacity: 0.2; }
+      100% { opacity: 1; }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        padding: 1rem;
+      }
+
+      .nav-links {
+        margin-top: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .nav-links li {
+        margin: 0.5rem;
+      }
+
+      .hero {
+        height: 60vh;
+        margin-top: 120px;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .slogan {
+        font-size: 1.2rem;
+      }
+
+      .opportunity-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .opportunity-image-container {
+        height: 150px;
+      }
+
+      .theme-toggle, #myBtn {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Theme Toggle Button -->
+  <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
+    <i class="fas fa-moon"></i>
+  </button>
+
+  <!-- Back to Top Button -->
+  <button onclick="topFunction()" id="myBtn" title="Go to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <nav class="navbar">
+    <div class="logo">Dear Future Luminary</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="teams.html">Teams</a></li>
+      <li><a href="programs.html">Programs</a></li>
+      <li><a href="radar.html" aria-current="page">Opportunity Radar</a></li>
+      <li><a href="upgrade.html">Extra</a></li>
+      <li><a href="about.html">About Us</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero">
+    <!-- Light Mode Image -->
+    <img 
+        src="D:\Dear Future Luminary\Hero Section.svg\7.svg" 
+        alt="Light Mode Hero" 
+        class="hero-bg-image light-image"
+    >
+    <!-- Dark Mode Image -->
+    <img 
+        src="D:\Dear Future Luminary\Hero Section.svg\8.svg" 
+        alt="Dark Mode Hero" 
+        class="hero-bg-image dark-image"
+    >
+    
+  </header>
+
+  <main class="section-container">
+    <div class="opportunity-grid">
+      <!-- Opportunity 1 -->
+      <section class="opportunity-card">
+        <div class="opportunity-image-container">
+          <img src="C:\Users\DELL_MCC\Downloads\radar\393420304_312425891488145_2544831045545130754_n.jpg" alt="شباب بتساعد شباب">
+        </div>
+        <div class="opportunity-details">
+          <p><strong>Channel:</strong> <span class="channel-name">شباب بتساعد شباب</span></p>
+          <p><strong>Channel Link:</strong> <a href="https://t.me/shbab_btsad_shbab" target="_blank" rel="noopener" class="opportunity-link">Click Here <i class="fas fa-external-link-alt"></i></a></p>
+        </div>
+      </section>
+
+      <!-- Opportunity 2 -->
+      <section class="opportunity-card">
+        <div class="opportunity-image-container">
+          <img src="C:\Users\DELL_MCC\Downloads\radar\انه يريد السامر بروجرام اعطيه السامر بروجرام.pngة.jpg" alt="أنه يريد السامر بروجرامز اعطيه السامر بروجرامز">
+        </div>
+        <div class="opportunity-details">
+          <p><strong>Channel:</strong> <span class="channel-name">أنه يريد السامر بروجرامز اعطيه السامر بروجرامز</span></p>
+          <p><strong>Channel Link:</strong> <a href="https://t.me/STEMUNION" target="_blank" rel="noopener" class="opportunity-link">Click Here <i class="fas fa-external-link-alt"></i></a></p>
+        </div>
+      </section>
+
+      <!-- Opportunity 3 -->
+      <section class="opportunity-card">
+        <div class="opportunity-image-container">
+          <img src="C:\Users\DELL_MCC\Downloads\radar\student activities with mariam.jpg" alt="Student activities with Mariam">
+        </div>
+        <div class="opportunity-details">
+          <p><strong>Channel:</strong> <span class="channel-name">Student activities with Mariam</span></p>
+          <p><strong>Channel Link:</strong> <a href="https://t.me/STUDENTASTIVIES" target="_blank" rel="noopener" class="opportunity-link">Click Here <i class="fas fa-external-link-alt"></i></a></p>
+        </div>
+      </section>
+
+      <!-- Opportunity 4 -->
+      <section class="opportunity-card">
+        <div class="opportunity-image-container">
+          <img src="C:\Users\DELL_MCC\Downloads\radar\Opportunitiies 4 youth.jpg" alt="Opportunities4Youth">
+        </div>
+        <div class="opportunity-details">
+          <p><strong>Channel:</strong> <span class="channel-name">Opportunities4Youth</span></p>
+          <p><strong>Channel Link:</strong> <a href="https://t.me/Opportunities4_Youth" target="_blank" rel="noopener" class="opportunity-link">Click Here <i class="fas fa-external-link-alt"></i></a></p>
+        </div>
+      </section>
+
+      <!-- Opportunity 5 -->
+      <section class="opportunity-card">
+        <div class="opportunity-image-container">
+          <img src="C:\Users\DELL_MCC\Downloads\radar\Opportunities Corners.jpg" alt="Opportunities Corners">
+        </div>
+        <div class="opportunity-details">
+          <p><strong>Channel:</strong> <span class="channel-name">Opportunities Corners</span></p>
+          <p><strong>Channel Link:</strong> <a href="https://t.me/opcorner" target="_blank" rel="noopener" class="opportunity-link">Click Here <i class="fas fa-external-link-alt"></i></a></p>
+        </div>
+      </section>
+
+      <!-- Opportunity 6 -->
+      <section class="opportunity-card">
+        <div class="opportunity-image-container">
+          <img src="C:\Users\DELL_MCC\Downloads\radar\Opportunities_Platform.jpg" alt="Opportunities_Platform">
+        </div>
+        <div class="opportunity-details">
+          <p><strong>Channel:</strong> <span class="channel-name">Opportunities_Platform</span></p>
+          <p><strong>Channel Link:</strong> <a href="https://t.me/opportunities_platform121" target="_blank" rel="noopener" class="opportunity-link">Click Here <i class="fas fa-external-link-alt"></i></a></p>
+        </div>
+      </section>
+
+      <!-- Opportunity 7 -->
+      <section class="opportunity-card">
+        <div class="opportunity-image-container">
+          <img src="C:\Users\DELL_MCC\Downloads\radar\Be a better version of yourself 🤩💜.jpg" alt="Be a better version of yourself">
+        </div>
+        <div class="opportunity-details">
+          <p><strong>Channel:</strong> <span class="channel-name">Be a better version of yourself 🤩💜</span></p>
+          <p><strong>Channel Link:</strong> <a href="https://t.me/bebetterversionofyourself" target="_blank" rel="noopener" class="opportunity-link">Click Here <i class="fas fa-external-link-alt"></i></a></p>
+        </div>
+      </section>
+
+      <!-- Opportunity 8 -->
+      <section class="opportunity-card">
+        <div class="opportunity-image-container">
+          <img src="C:\Users\DELL_MCC\Downloads\radar\𝗢𝗽𝗽𝗼𝗿𝘁𝘂𝗻𝗶𝘁𝘆 𝗖𝗼𝗺𝗺𝘂𝗻𝗶𝘁𝘆.jpg" alt="𝗢𝗽𝗽𝗼𝗿𝘁𝘂𝗻𝗶𝘁𝘆 𝗖𝗼𝗺𝗺𝘂𝗻𝗶𝘁𝘆">
+        </div>
+        <div class="opportunity-details">
+          <p><strong>Channel:</strong> <span class="channel-name">𝗢𝗽𝗽𝗼𝗿𝘁𝘂𝗻𝗶𝘁𝘆 𝗖𝗼𝗺𝗺𝘂𝗻𝗶𝘁𝘆</span></p>
+          <p><strong>Channel Link:</strong> <a href="https://t.me/biotechnologyopportunity" target="_blank" rel="noopener" class="opportunity-link">Click Here <i class="fas fa-external-link-alt"></i></a></p>
+        </div>
+      </section>
+
+      <!-- Opportunity 9 -->
+      <section class="opportunity-card">
+        <div class="opportunity-image-container">
+          <img src="C:\Users\DELL_MCC\Downloads\radar\Competitions, teams & course.jpg" alt="Competitions, teams & course">
+        </div>
+        <div class="opportunity-details">
+          <p><strong>Channel:</strong> <span class="channel-name">Competitions, teams & course</span></p>
+          <p><strong>Channel Link:</strong> <a href="https://t.me/maryamabdelmagedgalal" target="_blank" rel="noopener" class="opportunity-link">Click Here <i class="fas fa-external-link-alt"></i></a></p>
+        </div>
+      </section>
+
+      <!-- Opportunity 10 -->
+      <section class="opportunity-card">
+        <div class="opportunity-image-container">
+          <img src="C:\Users\DELL_MCC\Downloads\radar\men7a.jpg" alt="المنحة ELMIN7A">
+        </div>
+        <div class="opportunity-details">
+          <p><strong>Channel:</strong> <span class="channel-name">المنحة ELMIN7A</span></p>
+          <p><strong>Channel Link:</strong> <a href="https://t.me/elmin7a" target="_blank" rel="noopener" class="opportunity-link">Click Here <i class="fas fa-external-link-alt"></i></a></p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>Connect With Us:</p>
+    <div class="social-icons">
+      <a href="https://www.facebook.com/profile.php?id=100088385822088" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/loka_luminary/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.linkedin.com/in/malak-savvyt-t/" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+    </div>
+    <p>&copy; 2025 Dear Future Luminary | Designed by Malak Emad</p>
+  </footer>
+
+  <script>
+    // Back to Top Button
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        document.getElementById("myBtn").style.display = "block";
+      } else {
+        document.getElementById("myBtn").style.display = "none";
+      }
+    }
+
+    function topFunction() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }
+
+    // Theme Toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = themeToggle.querySelector('i');
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+    // Check for saved theme or preferred scheme
+    const currentTheme = localStorage.getItem('theme');
+    if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
+      document.body.setAttribute('data-theme', 'dark');
+      themeIcon.classList.replace('fa-moon', 'fa-sun');
+    }
+
+    // Toggle theme
+    themeToggle.addEventListener('click', () => {
+      const isDark = document.body.getAttribute('data-theme') === 'dark';
+      
+      if (isDark) {
+        document.body.removeAttribute('data-theme');
+        themeIcon.classList.replace('fa-sun', 'fa-moon');
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.body.setAttribute('data-theme', 'dark');
+        themeIcon.classList.replace('fa-moon', 'fa-sun');
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+
+    // Add constellation effect to hero section
+    const hero = document.querySelector('.hero');
+    const starsCount = 50;
+    
+    for (let i = 0; i < starsCount; i++) {
+      const star = document.createElement('div');
+      star.style.position = 'absolute';
+      star.style.width = `${Math.random() * 3}px`;
+      star.style.height = star.style.width;
+      star.style.backgroundColor = 'white';
+      star.style.borderRadius = '50%';
+      star.style.top = `${Math.random() * 100}%`;
+      star.style.left = `${Math.random() * 100}%`;
+      star.style.opacity = Math.random();
+      star.style.animation = `twinkle ${2 + Math.random() * 3}s infinite alternate`;
+      
+      hero.appendChild(star);
+    }
+  </script>
+</body>
+</html>

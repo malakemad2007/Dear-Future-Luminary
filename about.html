@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | Dear Future Luminary</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Overlock:wght@400;700&family=Changa+One&family=Kalam&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      /* Light Theme */
+      --primary-bg: #f8f9fa;
+      --secondary-bg: #ffffff;
+      --text-color: #2c3e50;
+      --accent-color: #6a3093;
+      --accent-light: #a044ff;
+      --highlight: #f1c40f;
+      --card-bg: #ffffff;
+      --card-shadow: rgba(0, 0, 0, 0.1);
+      --nav-bg: rgba(255, 255, 255, 0.9);
+      --hero-bg: linear-gradient(135deg, #6a3093 0%, #a044ff 100%);
+      --footer-bg: #2c3e50;
+      --star-color: rgba(106, 48, 147, 0.2);
+      --section-bg: #ffffff;
+    }
+
+    /* Dark Theme */
+    [data-theme="dark"] {
+      --primary-bg: #0f0e17;
+      --secondary-bg: #1a1a2e;
+      --text-color: #e6e6e6;
+      --accent-color: #a044ff;
+      --accent-light: #bb86fc;
+      --highlight: #f1c40f;
+      --card-bg: #1a1a2e;
+      --card-shadow: rgba(0, 0, 0, 0.3);
+      --nav-bg: rgba(15, 14, 23, 0.9);
+      --hero-bg: linear-gradient(135deg, #1a1a2e 0%, #0f0e17 100%);
+      --footer-bg: #0f0e17;
+      --star-color: rgba(255, 255, 255, 0.1);
+      --section-bg: #1a1a2e;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body {
+      font-family: 'Overlock', cursive;
+      background-color: var(--primary-bg);
+      color: var(--text-color);
+      line-height: 1.6;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(var(--star-color) 1px, transparent 1px),
+        radial-gradient(var(--star-color) 1px, transparent 1px);
+      background-size: 30px 30px;
+      background-position: 0 0, 15px 15px;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* Navigation */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 5%;
+      background-color: var(--nav-bg);
+      backdrop-filter: blur(10px);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      font-family: 'Changa One', cursive;
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--accent-color);
+      text-shadow: 0 0 10px rgba(160, 68, 255, 0.3);
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+    }
+
+    .nav-links li {
+      margin-left: 2rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-color);
+      font-weight: bold;
+      font-size: 1.1rem;
+      position: relative;
+      padding: 0.5rem 0;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--accent-light);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-light);
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      height: 80vh;
+      margin-top: 80px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .hero-bg-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      transition: opacity 0.5s ease;
+    }
+
+    .light-image {
+      opacity: 1;
+    }
+
+    .dark-image {
+      opacity: 0;
+    }
+
+    [data-theme="dark"] .light-image {
+      opacity: 0;
+    }
+
+    [data-theme="dark"] .dark-image {
+      opacity: 1;
+    }
+
+    .hero-content {
+      animation: fadeInUp 1s ease;
+      color: white;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      max-width: 800px;
+      padding: 0 2rem;
+    }
+
+    .hero h1 {
+      font-family: 'Changa One', cursive;
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      color: white;
+    }
+
+    .slogan {
+      font-family: 'Kalam', cursive;
+      font-size: 1.5rem;
+      color: white;
+    }
+
+    /* Main Content */
+    .about-section {
+      padding: 4rem 5%;
+      background-color: var(--primary-bg);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .about-section h2 {
+      font-family: 'Changa One', cursive;
+      color: var(--accent-color);
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .about-section h2::after {
+      content: '';
+      display: block;
+      width: 100px;
+      height: 4px;
+      background: var(--highlight);
+      margin: 0.5rem auto;
+      border-radius: 2px;
+    }
+
+    .team-members {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .member {
+      background-color: var(--card-bg);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 5px 15px var(--card-shadow);
+      transition: transform 0.3s, box-shadow 0.3s;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .member:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px var(--card-shadow);
+    }
+
+    .profile-pic {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid var(--accent-color);
+      margin-bottom: 1.5rem;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+
+    .member:hover .profile-pic {
+      transform: scale(1.05);
+      border-color: var(--accent-light);
+    }
+
+    .member h3 {
+      font-family: 'Changa One', cursive;
+      color: var(--accent-color);
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+
+    .bio {
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+      color: var(--text-color);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 1.5rem;
+      background-color: var(--accent-color);
+      color: white;
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: bold;
+      transition: all 0.3s;
+      margin-top: 1rem;
+    }
+
+    .btn:hover {
+      background-color: var(--accent-light);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(160, 68, 255, 0.3);
+    }
+
+    /* Footer */
+    .footer {
+      background-color: var(--footer-bg);
+      color: white;
+      text-align: center;
+      padding: 2.5rem 0;
+      font-size: 1rem;
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .social-icons a {
+      color: white;
+      background-color: var(--accent-color);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+
+    .social-icons a:hover {
+      background-color: var(--accent-light);
+      transform: translateY(-3px);
+    }
+
+    /* Back to Top Button */
+    #myBtn {
+      display: none;
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 99;
+      border: none;
+      outline: none;
+      background-color: var(--accent-color);
+      color: white;
+      cursor: pointer;
+      padding: 15px;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 15px rgba(106, 48, 147, 0.3);
+      transition: all 0.3s;
+    }
+
+    #myBtn:hover {
+      background-color: var(--accent-light);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(160, 68, 255, 0.4);
+    }
+
+    /* Theme Toggle */
+    .theme-toggle {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      z-index: 99;
+      background-color: var(--accent-color);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 15px rgba(106, 48, 147, 0.3);
+      transition: all 0.3s;
+    }
+
+    .theme-toggle:hover {
+      background-color: var(--accent-light);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(160, 68, 255, 0.4);
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes twinkle {
+      0% { opacity: 0.2; }
+      100% { opacity: 1; }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        padding: 1rem;
+      }
+
+      .nav-links {
+        margin-top: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .nav-links li {
+        margin: 0.5rem;
+      }
+
+      .hero {
+        height: 60vh;
+        margin-top: 120px;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .slogan {
+        font-size: 1.2rem;
+      }
+
+      .team-members {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-pic {
+        width: 120px;
+        height: 120px;
+      }
+
+      .theme-toggle, #myBtn {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Theme Toggle Button -->
+  <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
+    <i class="fas fa-moon"></i>
+  </button>
+
+  <!-- Back to Top Button -->
+  <button onclick="topFunction()" id="myBtn" title="Go to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <nav class="navbar">
+    <div class="logo">Dear Future Luminary</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="teams.html">Teams</a></li>
+      <li><a href="programs.html">Programs</a></li>
+      <li><a href="radar.html">Opportunity Radar</a></li>
+      <li><a href="upgrade.html">Extra</a></li>
+      <li><a href="about.html" aria-current="page">About Us</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero">
+    <!-- Light Mode Image -->
+    <img 
+        src="D:\Dear Future Luminary\Hero Section.svg\11.svg" 
+        alt="Light Mode Hero" 
+        class="hero-bg-image light-image"
+    >
+    <!-- Dark Mode Image -->
+    <img 
+        src="D:\Dear Future Luminary\Hero Section.svg\12.svg" 
+        alt="Dark Mode Hero" 
+        class="hero-bg-image dark-image"
+    >
+    
+  </header>
+
+  <main class="about-section">
+    <h2>Our Team</h2>
+    <div class="team-members">
+      <!-- Malak Emad Section -->
+      <div class="member">
+        <img src="D:\Dear Future Luminary\photo_2025-02-10_19-17-06.jpg" alt="Malak Emad" class="profile-pic">
+        <h3>Malak Emad</h3>
+        <p class="bio">I'm passionate about chemistry, STEM, and social impact. I believe in helping students unlock their full potential and guiding them towards opportunities for success.</p>
+        <a href="D:\Dear Future Luminary\View more Mal.html" class="btn">View More</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>Connect With Us:</p>
+    <div class="social-icons">
+      <a href="https://www.facebook.com/profile.php?id=100088385822088" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/loka_luminary/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.linkedin.com/in/malak-savvyt-t/" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+    </div>
+    <p>&copy; 2025 Dear Future Luminary | Designed by Malak Emad</p>
+  </footer>
+
+  <script>
+    // Back to Top Button
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        document.getElementById("myBtn").style.display = "block";
+      } else {
+        document.getElementById("myBtn").style.display = "none";
+      }
+    }
+
+    function topFunction() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }
+
+    // Theme Toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = themeToggle.querySelector('i');
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+    // Check for saved theme or preferred scheme
+    const currentTheme = localStorage.getItem('theme');
+    if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
+      document.body.setAttribute('data-theme', 'dark');
+      themeIcon.classList.replace('fa-moon', 'fa-sun');
+    }
+
+    // Toggle theme
+    themeToggle.addEventListener('click', () => {
+      const isDark = document.body.getAttribute('data-theme') === 'dark';
+      
+      if (isDark) {
+        document.body.removeAttribute('data-theme');
+        themeIcon.classList.replace('fa-sun', 'fa-moon');
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.body.setAttribute('data-theme', 'dark');
+        themeIcon.classList.replace('fa-moon', 'fa-sun');
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+
+    // Add constellation effect to hero section
+    const hero = document.querySelector('.hero');
+    const starsCount = 50;
+    
+    for (let i = 0; i < starsCount; i++) {
+      const star = document.createElement('div');
+      star.style.position = 'absolute';
+      star.style.width = `${Math.random() * 3}px`;
+      star.style.height = star.style.width;
+      star.style.backgroundColor = 'white';
+      star.style.borderRadius = '50%';
+      star.style.top = `${Math.random() * 100}%`;
+      star.style.left = `${Math.random() * 100}%`;
+      star.style.opacity = Math.random();
+      star.style.animation = `twinkle ${2 + Math.random() * 3}s infinite alternate`;
+      
+      hero.appendChild(star);
+    }
+  </script>
+</body>
+</html>

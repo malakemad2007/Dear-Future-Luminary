@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Malak Emad | Dear Future Luminary</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Overlock:wght@400;700&family=Changa+One&family=Kalam&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      /* Light Theme */
+      --primary-bg: #f8f9fa;
+      --secondary-bg: #ffffff;
+      --text-color: #2c3e50;
+      --accent-color: #6a3093;
+      --accent-light: #a044ff;
+      --highlight: #f1c40f;
+      --card-bg: #ffffff;
+      --card-shadow: rgba(0, 0, 0, 0.1);
+      --nav-bg: rgba(255, 255, 255, 0.9);
+      --hero-bg: linear-gradient(135deg, #6a3093 0%, #a044ff 100%);
+      --footer-bg: #2c3e50;
+      --star-color: rgba(106, 48, 147, 0.2);
+      --section-bg: #ffffff;
+    }
+
+    /* Dark Theme */
+    [data-theme="dark"] {
+      --primary-bg: #0f0e17;
+      --secondary-bg: #1a1a2e;
+      --text-color: #e6e6e6;
+      --accent-color: #a044ff;
+      --accent-light: #bb86fc;
+      --highlight: #f1c40f;
+      --card-bg: #1a1a2e;
+      --card-shadow: rgba(0, 0, 0, 0.3);
+      --nav-bg: rgba(15, 14, 23, 0.9);
+      --hero-bg: linear-gradient(135deg, #1a1a2e 0%, #0f0e17 100%);
+      --footer-bg: #0f0e17;
+      --star-color: rgba(255, 255, 255, 0.1);
+      --section-bg: #1a1a2e;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body {
+      font-family: 'Overlock', cursive;
+      background-color: var(--primary-bg);
+      color: var(--text-color);
+      line-height: 1.6;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(var(--star-color) 1px, transparent 1px),
+        radial-gradient(var(--star-color) 1px, transparent 1px);
+      background-size: 30px 30px;
+      background-position: 0 0, 15px 15px;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* Navigation */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 5%;
+      background-color: var(--nav-bg);
+      backdrop-filter: blur(10px);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      font-family: 'Changa One', cursive;
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--accent-color);
+      text-shadow: 0 0 10px rgba(160, 68, 255, 0.3);
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+    }
+
+    .nav-links li {
+      margin-left: 2rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-color);
+      font-weight: bold;
+      font-size: 1.1rem;
+      position: relative;
+      padding: 0.5rem 0;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--accent-light);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-light);
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      height: 80vh;
+      margin-top: 80px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .hero-bg-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      transition: opacity 0.5s ease;
+    }
+
+    .light-image {
+      opacity: 1;
+    }
+
+    .dark-image {
+      opacity: 0;
+    }
+
+    [data-theme="dark"] .light-image {
+      opacity: 0;
+    }
+
+    [data-theme="dark"] .dark-image {
+      opacity: 1;
+    }
+
+  
+    /* Main Content */
+    .more-info-section {
+      padding: 4rem 5%;
+      background-color: var(--primary-bg);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .more-info-section h2 {
+      font-family: 'Changa One', cursive;
+      color: var(--accent-color);
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .more-info-section h2::after {
+      content: '';
+      display: block;
+      width: 100px;
+      height: 4px;
+      background: var(--highlight);
+      margin: 0.5rem auto;
+      border-radius: 2px;
+    }
+
+    .info-content {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    .profile-section {
+      text-align: center;
+      background-color: var(--card-bg);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 5px 15px var(--card-shadow);
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .profile-pic {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid var(--accent-color);
+      margin-bottom: 1.5rem;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+
+    .profile-pic:hover {
+      transform: scale(1.05);
+      border-color: var(--accent-light);
+    }
+
+    .profile-section h3 {
+      font-family: 'Changa One', cursive;
+      color: var(--accent-color);
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .bio {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: var(--text-color);
+    }
+
+    /* Experience Section */
+    .experience-section {
+      background-color: var(--card-bg);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 5px 15px var(--card-shadow);
+    }
+
+    .experience-section h3 {
+      font-family: 'Changa One', cursive;
+      color: var(--accent-color);
+      font-size: 1.8rem;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .experience-items {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .experience-item {
+      background-color: var(--section-bg);
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 3px 10px var(--card-shadow);
+      transition: transform 0.3s, box-shadow 0.3s;
+      border-left: 4px solid var(--highlight);
+    }
+
+    .experience-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px var(--card-shadow);
+    }
+
+    .experience-item h4 {
+      font-size: 1.2rem;
+      margin-bottom: 0.8rem;
+      color: var(--accent-color);
+    }
+
+    .project-title {
+      color: var(--accent-light);
+      font-weight: bold;
+    }
+
+    .experience-item p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--text-color);
+    }
+
+    /* Contact Section */
+    .contact-me-section {
+      background-color: var(--card-bg);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 5px 15px var(--card-shadow);
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    .contact-me-section h2 {
+      font-family: 'Changa One', cursive;
+      color: var(--accent-color);
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-me-icons {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-me-icons a {
+      color: var(--accent-color);
+      background-color: var(--highlight);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      transition: all 0.3s;
+    }
+
+    .contact-me-icons a:hover {
+      background-color: var(--accent-light);
+      color: white;
+      transform: translateY(-5px);
+    }
+
+    .contact-details {
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+
+    .contact-details a {
+      color: var(--accent-light);
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .contact-details a:hover {
+      text-decoration: underline;
+    }
+
+    /* Footer */
+    .footer {
+      background-color: var(--footer-bg);
+      color: white;
+      text-align: center;
+      padding: 2rem 0;
+      font-size: 1rem;
+      margin-top: 3rem;
+    }
+
+    /* Back to Top Button */
+    #myBtn {
+      display: none;
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 99;
+      border: none;
+      outline: none;
+      background-color: var(--accent-color);
+      color: white;
+      cursor: pointer;
+      padding: 15px;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 15px rgba(106, 48, 147, 0.3);
+      transition: all 0.3s;
+    }
+
+    #myBtn:hover {
+      background-color: var(--accent-light);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(160, 68, 255, 0.4);
+    }
+
+    /* Theme Toggle */
+    .theme-toggle {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      z-index: 99;
+      background-color: var(--accent-color);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 15px rgba(106, 48, 147, 0.3);
+      transition: all 0.3s;
+    }
+
+    .theme-toggle:hover {
+      background-color: var(--accent-light);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(160, 68, 255, 0.4);
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes twinkle {
+      0% { opacity: 0.2; }
+      100% { opacity: 1; }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        padding: 1rem;
+      }
+
+      .nav-links {
+        margin-top: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .nav-links li {
+        margin: 0.5rem;
+      }
+
+      .hero {
+        height: 60vh;
+        margin-top: 120px;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .slogan {
+        font-size: 1.2rem;
+      }
+
+      .more-info-section h2 {
+        font-size: 2rem;
+      }
+
+      .profile-pic {
+        width: 150px;
+        height: 150px;
+      }
+
+      .experience-items {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-me-icons {
+        gap: 1.5rem;
+      }
+
+      .theme-toggle, #myBtn {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Theme Toggle Button -->
+  <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
+    <i class="fas fa-moon"></i>
+  </button>
+
+  <!-- Back to Top Button -->
+  <button onclick="topFunction()" id="myBtn" title="Go to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <nav class="navbar">
+    <div class="logo">Dear Future Luminary</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="teams.html">Teams</a></li>
+      <li><a href="programs.html">Programs</a></li>
+      <li><a href="radar.html">Opportunity Radar</a></li>
+      <li><a href="upgrade.html">Extra</a></li>
+      <li><a href="about.html">About Us</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero">
+    <!-- Light Mode Image -->
+    <img 
+        src="D:\Dear Future Luminary\Hero Section.svg\13.svg" 
+        alt="Light Mode Hero" 
+        class="hero-bg-image light-image"
+    >
+    <!-- Dark Mode Image -->
+    <img 
+        src="D:\Dear Future Luminary\Hero Section.svg\14.svg" 
+        alt="Dark Mode Hero" 
+        class="hero-bg-image dark-image"
+    >
+    
+  </header>
+
+  <main class="more-info-section">
+    <h2>About Malak Emad</h2>
+    <div class="info-content">
+      <div class="profile-section">
+        <img src="D:\Others\photo_2025-02-10_19-17-06.jpg" alt="Malak Emad" class="profile-pic">
+        <h3>Malak Emad</h3>
+        <p class="bio">
+          I am passionate about Chemistry, STEM, and Environmental Science. I believe in the power of community, and I strive to create opportunities for young people to learn, grow, and thrive. I love working on projects that have a positive impact, whether it's through tutoring, volunteering, or creating content that educates and inspires others.
+        </p>
+      </div>
+
+      <!-- Experience Section -->
+      <div class="experience-section">
+        <h3>Experience & Projects</h3>
+        <div class="experience-items">
+
+          <!-- Project Lead: Optimizing Crop Growth -->
+          <div class="experience-item">
+            <h4>Project Lead: <span class="project-title">"Optimizing Crop Growth"</span></h4>
+            <p>Developed a smart system for automating crop irrigation using temperature and soil humidity sensors, optimizing water usage. This project was recognized with a Certificate of Excellence by AFS and aimed at conserving water resources while improving agricultural yields.</p>
+          </div>
+
+          <!-- AFS Global STEM Academies -->
+          <div class="experience-item">
+            <h4>Participant: <span class="project-title">AFS Global STEM Academies</span></h4>
+            <p>Selected to participate in the AFS Global STEM Academies program, focusing on global citizenship, intercultural exchange, and STEM-based problem-solving, while collaborating with international peers to address sustainability challenges.</p>
+          </div>
+
+          <!-- Kode with Klossy -->
+          <div class="experience-item">
+            <h4>Participant: <span class="project-title">Kode with Klossy</span></h4>
+            <p>Participated in the Kode with Klossy summer program, learning front-end web development and collaborating with a team to build a tech project that addressed real-world challenges.</p>
+          </div>
+
+          <!-- Girls Who Code -->
+          <div class="experience-item">
+            <h4>Participant: <span class="project-title">Girls Who Code</span></h4>
+            <p>Joined the Girls Who Code program, gaining hands-on coding experience and expanding knowledge in programming concepts, web development, and leadership skills in tech.</p>
+          </div>
+
+          <!-- BUILD-IN-A-BOX -->
+          <div class="experience-item">
+            <h4>Participant: <span class="project-title">BUILD-IN-A-BOX</span></h4>
+            <p>Engaged in the BUILD-IN-A-BOX program, exploring entrepreneurship fundamentals, business idea generation, and leadership while developing innovative solutions with a team.</p>
+          </div>
+
+          <!-- Microsoft Student Ambassadors Learn -->
+          <div class="experience-item">
+            <h4>Participant: <span class="project-title">Microsoft Student Ambassadors Learn</span></h4>
+            <p>Completed multiple programming and tech workshops under the Microsoft Student Ambassadors Learn initiative, enhancing technical and problem-solving skills through project-based learning.</p>
+          </div>
+
+          <!-- Head of Social Media: Resala STEM -->
+          <div class="experience-item">
+            <h4>Head of Social Media: <span class="project-title">Resala STEM</span></h4>
+            <p>Managed social media strategies and campaigns, boosting the visibility of the organization. Led online workshops, social media engagement, and awareness-building for youth in STEM, building a dedicated online community.</p>
+          </div>
+
+          <!-- Social Media Supervisor for Mr. Mahmoud ElKholy -->
+          <div class="experience-item">
+            <h4>Social Media Supervisor: <span class="project-title">Mr. Mahmoud ElKholy (Mathematics)</span></h4>
+            <p>Managed and designed social media content for Mr. Mahmoud ElKholy, focusing on Mathematics tutoring. Increased his online presence and engagement, contributing to the growth of his tutoring business.</p>
+          </div>
+
+          <!-- Front-End Developer: Star Girls Africa -->
+          <div class="experience-item">
+            <h4>Front-End Developer: <span class="project-title">Star Girls Africa</span></h4>
+            <p>Worked as a front-end developer, creating an online book review website to promote literacy and encourage reading among young girls. This platform provided a space for sharing reviews and recommendations.</p>
+          </div>
+
+          <!-- Head of Social Media: Mr. Mahmoud ElKholy Learning Center -->
+          <div class="experience-item">
+            <h4>Social Media Manager: <span class="project-title">Mr. Mahmoud ElKholy Learning Center</span></h4>
+            <p>Developed social media strategies and content to enhance the visibility of the learning center. Focused on engaging parents and students through well-designed posts and promotional content.</p>
+          </div>
+
+          <!-- Assistant for Mathematics Teacher (Freelancer) -->
+          <div class="experience-item">
+            <h4>Assistant for Mathematics Teacher (Freelancer): <span class="project-title">Freelance Work</span></h4>
+            <p>Assisted in designing social media posts, creating interactive quizzes, and managing the Facebook page for a Mathematics tutor. Focused on increasing student engagement and attracting more clients through online platforms.</p>
+          </div>
+
+          <!-- Facilitator for Entrepreneurship Summer Camp -->
+          <div class="experience-item">
+            <h4>Facilitator: <span class="project-title">Entrepreneurship Summer Camp</span></h4>
+            <p>Facilitated a summer camp focused on entrepreneurship and business, guiding a team in researching and developing a solution to an African problem. Managed task delegation and helped the team achieve first-place in the competition.</p>
+          </div>
+
+          <!-- Certificate of Excellence: Climate Science Olympiad -->
+          <div class="experience-item">
+            <h4>Climate Science Olympiad: <span class="project-title">Gold Medal Award</span></h4>
+            <p>Earned a Gold Medal Award in the Climate Science Olympiad after contributing to solving global climate challenges through research and presentation.</p>
+          </div>
+
+          <!-- 1000 Girls, 1000 Futures: New York Academy of Sciences -->
+          <div class="experience-item">
+            <h4>Participant: <span class="project-title">1000 Girls, 1000 Futures</span></h4>
+            <p>Engaged in the 1000 Girls, 1000 Futures initiative by the New York Academy of Sciences. Developed mentorship skills and participated in global discussions surrounding science, technology, and gender equality.</p>
+          </div>
+
+          <!-- NASA Space Apps Bootcamp -->
+          <div class="experience-item">
+            <h4>Attendee: <span class="project-title">NASA Space Apps Cairo Bootcamp</span></h4>
+            <p>Participated in the NASA Space Apps Bootcamp, collaborating with a team to develop a solution to an Earth-related challenge, and gained valuable insight into space exploration and environmental science.</p>
+          </div>
+
+          <!-- Stanford University Code in Place: Online Course -->
+          <div class="experience-item">
+            <h4>Participant: <span class="project-title">Stanford University Code in Place</span></h4>
+            <p>Completed Stanford University's "Code in Place" introductory programming course, focusing on developing foundational programming skills in Python and computer science principles.</p>
+          </div>
+
+          <!-- Social Media Manager: TEDxEtTagammo -->
+          <div class="experience-item">
+            <h4>Event Organizer: <span class="project-title">TEDxEtTagammo</span></h4>
+            <p>Organized and facilitated TEDx events, contributing to the strategic planning and execution of various talks and workshops aimed at inspiring youth and promoting innovative thinking.</p>
+          </div>
+
+          <!-- Facilitator: Soliya's Global Circles Program -->
+          <div class="experience-item">
+            <h4>Facilitator: <span class="project-title">Soliya's Global Circles Program</span></h4>
+            <p>Led discussions as a facilitator in the Soliya Global Circles Program, where participants engaged in cross-cultural dialogues, fostering mutual understanding and leadership skills.</p>
+          </div>
+
+          <!-- Social Media Manager: MAS MUN -->
+          <div class="experience-item">
+            <h4>Head of Social Media: <span class="project-title">MAS MUN</span></h4>
+            <p>Headed the social media efforts for MAS MUN, creating content, engaging delegates, and promoting the Model United Nations conference, increasing awareness and participation in the event.</p>
+          </div>
+
+          <!-- Future Plans for 'Dear Future Luminary' -->
+          <div class="experience-item">
+            <h4>Founder: <span class="project-title">Dear Future Luminary</span></h4>
+            <p>Founded 'Dear Future Luminary', an initiative aimed at guiding high school students toward scholarship opportunities, self-development, and personal growth through curated resources and mentorship.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <section class="contact-me-section">
+        <h2>Contact Me</h2>
+        <div class="contact-me-icons">
+          <a href="https://t.me/loka_luminaryy" title="Telegram">
+            <i class="fab fa-telegram"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/malak-savvyt-t/" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+          <a href="https://www.instagram.com/loka_luminary/" title="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+        <div class="contact-details">
+          <p>If you want to connect with me, feel free to reach out through any of the channels above. You can also email me directly at <a href="mailto:malakemad7777777@example.com">malakemad7777777@example.com</a>.</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2025 Dear Future Luminary | Developed by Malak Emad</p>
+  </footer>
+
+  <script>
+    // Back to Top Button
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        document.getElementById("myBtn").style.display = "block";
+      } else {
+        document.getElementById("myBtn").style.display = "none";
+      }
+    }
+
+    function topFunction() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }
+
+    // Theme Toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = themeToggle.querySelector('i');
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+    // Check for saved theme or preferred scheme
+    const currentTheme = localStorage.getItem('theme');
+    if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
+      document.body.setAttribute('data-theme', 'dark');
+      themeIcon.classList.replace('fa-moon', 'fa-sun');
+    }
+
+    // Toggle theme
+    themeToggle.addEventListener('click', () => {
+      const isDark = document.body.getAttribute('data-theme') === 'dark';
+      
+      if (isDark) {
+        document.body.removeAttribute('data-theme');
+        themeIcon.classList.replace('fa-sun', 'fa-moon');
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.body.setAttribute('data-theme', 'dark');
+        themeIcon.classList.replace('fa-moon', 'fa-sun');
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+
+    
+
+    // Add style for twinkling animation
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes twinkle {
+        0% { opacity: 0.2; }
+        100% { opacity: 1; }
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+</body>
+</html>

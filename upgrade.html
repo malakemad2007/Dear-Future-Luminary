@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upgrade Your Journey | Dear Future Luminary</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Overlock:wght@400;700&family=Changa+One&family=Kalam&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      /* Light Theme */
+      --primary-bg: #f8f9fa;
+      --secondary-bg: #ffffff;
+      --text-color: #2c3e50;
+      --accent-color: #6a3093;
+      --accent-light: #a044ff;
+      --highlight: #f1c40f;
+      --card-bg: #ffffff;
+      --card-shadow: rgba(0, 0, 0, 0.1);
+      --nav-bg: rgba(255, 255, 255, 0.9);
+      --hero-bg: linear-gradient(135deg, #6a3093 0%, #a044ff 100%);
+      --footer-bg: #2c3e50;
+      --star-color: rgba(106, 48, 147, 0.2);
+      --section-bg: #ffffff;
+    }
+
+    /* Dark Theme */
+    [data-theme="dark"] {
+      --primary-bg: #0f0e17;
+      --secondary-bg: #1a1a2e;
+      --text-color: #e6e6e6;
+      --accent-color: #a044ff;
+      --accent-light: #bb86fc;
+      --highlight: #f1c40f;
+      --card-bg: #1a1a2e;
+      --card-shadow: rgba(0, 0, 0, 0.3);
+      --nav-bg: rgba(15, 14, 23, 0.9);
+      --hero-bg: linear-gradient(135deg, #1a1a2e 0%, #0f0e17 100%);
+      --footer-bg: #0f0e17;
+      --star-color: rgba(255, 255, 255, 0.1);
+      --section-bg: #1a1a2e;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body {
+      font-family: 'Overlock', cursive;
+      background-color: var(--primary-bg);
+      color: var(--text-color);
+      line-height: 1.6;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(var(--star-color) 1px, transparent 1px),
+        radial-gradient(var(--star-color) 1px, transparent 1px);
+      background-size: 30px 30px;
+      background-position: 0 0, 15px 15px;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* Navigation */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 5%;
+      background-color: var(--nav-bg);
+      backdrop-filter: blur(10px);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      font-family: 'Changa One', cursive;
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--accent-color);
+      text-shadow: 0 0 10px rgba(160, 68, 255, 0.3);
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+    }
+
+    .nav-links li {
+      margin-left: 2rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-color);
+      font-weight: bold;
+      font-size: 1.1rem;
+      position: relative;
+      padding: 0.5rem 0;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--accent-light);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-light);
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      height: 80vh;
+      margin-top: 80px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .hero-bg-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      transition: opacity 0.5s ease;
+    }
+
+    .light-image {
+      opacity: 1;
+    }
+
+    .dark-image {
+      opacity: 0;
+    }
+
+    [data-theme="dark"] .light-image {
+      opacity: 0;
+    }
+
+    [data-theme="dark"] .dark-image {
+      opacity: 1;
+    }
+
+    .hero-content {
+      animation: fadeInUp 1s ease;
+      color: white;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      max-width: 800px;
+      padding: 0 2rem;
+    }
+
+    .hero h1 {
+      font-family: 'Changa One', cursive;
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      color: white;
+    }
+
+    .slogan {
+      font-family: 'Kalam', cursive;
+      font-size: 1.5rem;
+      color: white;
+    }
+
+    /* Main Content */
+    .section-container {
+      padding: 4rem 5%;
+      background-color: var(--primary-bg);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-family: 'Changa One', cursive;
+      color: var(--accent-color);
+      margin: 2rem 0 1.5rem;
+      font-size: 2rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 100px;
+      height: 4px;
+      background: var(--highlight);
+      margin: 0.5rem auto;
+      border-radius: 2px;
+    }
+
+    /* Cards Grid */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    /* YouTube Cards */
+    .youtube-card {
+      background-color: var(--card-bg);
+      border-radius: 15px;
+      padding: 1.5rem;
+      box-shadow: 0 5px 15px var(--card-shadow);
+      transition: transform 0.3s, box-shadow 0.3s;
+      border-left: 4px solid #FF0000; /* YouTube red */
+    }
+
+    .youtube-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px var(--card-shadow);
+    }
+
+    .youtube-card h3 {
+      font-family: 'Changa One', cursive;
+      color: var(--accent-color);
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+
+    .youtube-card p {
+      margin-bottom: 0.8rem;
+      font-size: 1rem;
+    }
+
+    .youtube-card strong {
+      color: var(--accent-light);
+    }
+
+    .youtube-card a {
+      color: var(--highlight);
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .youtube-card a:hover {
+      color: var(--accent-light);
+    }
+
+    /* Drive Card */
+    .drive-card {
+      background-color: var(--card-bg);
+      border-radius: 15px;
+      padding: 1.5rem;
+      box-shadow: 0 5px 15px var(--card-shadow);
+      transition: transform 0.3s, box-shadow 0.3s;
+      border-left: 4px solid #4285F4; /* Google Drive blue */
+    }
+
+    .drive-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px var(--card-shadow);
+    }
+
+    .drive-card h3 {
+      font-family: 'Changa One', cursive;
+      color: var(--accent-color);
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+
+    .drive-card p {
+      margin-bottom: 0.8rem;
+      font-size: 1rem;
+    }
+
+    .drive-card strong {
+      color: var(--accent-light);
+    }
+
+    .drive-card a {
+      color: var(--highlight);
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .drive-card a:hover {
+      color: var(--accent-light);
+    }
+
+    /* Footer */
+    .footer {
+      background-color: var(--footer-bg);
+      color: white;
+      text-align: center;
+      padding: 2.5rem 0;
+      font-size: 1rem;
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .social-icons a {
+      color: white;
+      background-color: var(--accent-color);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+
+    .social-icons a:hover {
+      background-color: var(--accent-light);
+      transform: translateY(-3px);
+    }
+
+    /* Back to Top Button */
+    #myBtn {
+      display: none;
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 99;
+      border: none;
+      outline: none;
+      background-color: var(--accent-color);
+      color: white;
+      cursor: pointer;
+      padding: 15px;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 15px rgba(106, 48, 147, 0.3);
+      transition: all 0.3s;
+    }
+
+    #myBtn:hover {
+      background-color: var(--accent-light);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(160, 68, 255, 0.4);
+    }
+
+    /* Theme Toggle */
+    .theme-toggle {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      z-index: 99;
+      background-color: var(--accent-color);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 15px rgba(106, 48, 147, 0.3);
+      transition: all 0.3s;
+    }
+
+    .theme-toggle:hover {
+      background-color: var(--accent-light);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(160, 68, 255, 0.4);
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes twinkle {
+      0% { opacity: 0.2; }
+      100% { opacity: 1; }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        padding: 1rem;
+      }
+
+      .nav-links {
+        margin-top: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .nav-links li {
+        margin: 0.5rem;
+      }
+
+      .hero {
+        height: 60vh;
+        margin-top: 120px;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .slogan {
+        font-size: 1.2rem;
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+      }
+
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .youtube-card, .drive-card {
+        padding: 1.2rem;
+      }
+
+      .theme-toggle, #myBtn {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Theme Toggle Button -->
+  <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
+    <i class="fas fa-moon"></i>
+  </button>
+
+  <!-- Back to Top Button -->
+  <button onclick="topFunction()" id="myBtn" title="Go to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <nav class="navbar">
+    <div class="logo">Dear Future Luminary</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="teams.html">Teams</a></li>
+      <li><a href="programs.html">Programs</a></li>
+      <li><a href="radar.html">Opportunity Radar</a></li>
+      <li><a href="upgrade.html" aria-current="page">Extra</a></li>
+      <li><a href="about.html">About Us</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero">
+    <!-- Light Mode Image -->
+    <img 
+        src="D:\Dear Future Luminary\Hero Section.svg\9.svg" 
+        alt="Light Mode Hero" 
+        class="hero-bg-image light-image"
+    >
+    <!-- Dark Mode Image -->
+    <img 
+        src="D:\Dear Future Luminary\Hero Section.svg\10.svg" 
+        alt="Dark Mode Hero" 
+        class="hero-bg-image dark-image"
+    >
+    
+  </header>
+
+  <main class="section-container">
+    <h2 class="section-title">Ultimate YouTube Channels</h2>
+    
+    <div class="cards-grid">
+      <!-- College Essay Guy -->
+      <section class="youtube-card">
+        <h3>College Essay Guy</h3>
+        <p><strong>Link:</strong> <a href="https://www.youtube.com/@CollegeEssayGuy" target="_blank" rel="noopener">Watch <i class="fas fa-external-link-alt"></i></a></p>
+        <p><strong>Description:</strong> Empty</p>
+      </section>
+
+      <!-- Smile With Sola -->
+      <section class="youtube-card">
+        <h3>Smile With Sola</h3>
+        <p><strong>Link:</strong> <a href="https://www.youtube.com/@SmileWithSola" target="_blank" rel="noopener">Watch <i class="fas fa-external-link-alt"></i></a></p>
+        <p><strong>Description:</strong> I'm Sola & I'm a final-year student studying in London! This channel is for all things productivity, lifestyle, and technology! I will hopefully be providing you with motivation as well as tips and tricks to improve your day-to-day life! Follow me on this journey school! 🩷</p>
+      </section>
+
+      <!-- The Scholarship System -->
+      <section class="youtube-card">
+        <h3>The Scholarship System</h3>
+        <p><strong>Link:</strong> <a href="https://www.youtube.com/@TheScholarshipSystem" target="_blank" rel="noopener">Watch <i class="fas fa-external-link-alt"></i></a></p>
+        <p><strong>Description:</strong> The Scholarship System educates students on how to graduate from college debt-free. Using Jocelyn Pearson's personal experience of securing over $126K in scholarships and getting paid to go to school, she now teaches the same process she used to students & families all over the country. Covering the foundation of paying for college including loans, FAFSA, grants, and more to teaching strategies for applying for scholarships, The System has already saved families over $13.15 million (as of Aug 2024) and growing.</p>
+      </section>
+
+      <!-- Preaching P -->
+      <section class="youtube-card">
+        <h3>Preaching P</h3>
+        <p><strong>Link:</strong> <a href="https://www.youtube.com/@preachingp" target="_blank" rel="noopener">Watch <i class="fas fa-external-link-alt"></i></a></p>
+        <p><strong>Description:</strong> Empty</p>
+      </section>
+
+      <!-- Conquer College Admissions -->
+      <section class="youtube-card">
+        <h3>Conquer College Admissions</h3>
+        <p><strong>Link:</strong> <a href="https://www.youtube.com/@ConquerCollegeAdmissions" target="_blank" rel="noopener">Watch <i class="fas fa-external-link-alt"></i></a></p>
+        <p><strong>Description:</strong> Welcome to finding your passion and using that passion to conquer college admissions (and of course, OPEN that acceptance letter from your dream Ivy League/Top-Tier college)! "Conquer College Admissions" channel is a mix of inspiration and practical college admissions that will get you closer to getting accepted into your dream college. The host of this channel is Julie Kim, a graduate of USC and Harvard. Since 2009, Julie has helped over 600 students get accepted into their dream Ivy League/Top-Tier School.</p>
+      </section>
+
+      <!-- Elise Pham -->
+      <section class="youtube-card">
+        <h3>Elise Pham</h3>
+        <p><strong>Link:</strong> <a href="https://www.youtube.com/@ultimateivyleagueguide" target="_blank" rel="noopener">Watch <i class="fas fa-external-link-alt"></i></a></p>
+        <p><strong>Description:</strong> Harvard Pre-Med & 5-Star College Admissions Counselor. Founder of Ultimate Ivy League Guide.</p>
+      </section>
+
+      <!-- Bold.org -->
+      <section class="youtube-card">
+        <h3>Bold.org</h3>
+        <p><strong>Link:</strong> <a href="https://www.youtube.com/@bolddotorg" target="_blank" rel="noopener">Watch <i class="fas fa-external-link-alt"></i></a></p>
+        <p><strong>Description:</strong> Fighting Student Debt! The average student today will graduate more than $30,000 in debt and is far less likely to start small businesses, seek the highest impact careers, buy homes, or start families. At Bold.org, we believe that's a problem worth solving.</p>
+      </section>
+
+      <!-- ElevatEd School -->
+      <section class="youtube-card">
+        <h3>ElevatEd School</h3>
+        <p><strong>Link:</strong> <a href="https://www.youtube.com/@elevatEDschool" target="_blank" rel="noopener">Watch <i class="fas fa-external-link-alt"></i></a></p>
+        <p><strong>Description:</strong> Jeffery and Kevin, two Yalies who want to help you express yourself more clearly and get into your dream school! Kevin Zhen: Exeter '16, Yale '20 (East Asian Studies). Since 2016, Kevin has personally helped more than 115+ students gain acceptances into every Ivy League University, as well as top schools such as Stanford and MIT. He also loves teaching creative nonfiction, flash fiction, and poetry. In total, his students have won more than 175+ Scholastic Writing Awards. Jeffery Yu: Yale '23 (Computer Science and East Asian Studies). Jeff has worked as a software engineering intern at Playstation, worked at Ernst & Young as a tech consultant and served as a Student Ambassador to the Yale Admissions Office. He's also written extensively about college admissions on Quora and taught courses on motivation and leadership while sponsored by the US Embassy in Tokyo.</p>
+      </section>
+    </div>
+
+    <h2 class="section-title">Personal Drive (Essays & Books)</h2>
+    
+    <div class="cards-grid">
+      <section class="drive-card">
+        <h3>Personal Drive: Books for Essays</h3>
+        <p><strong>Access:</strong> <a href="https://drive.google.com/drive/folders/1QUJet5twHBsK96-sK_AmuxhXAVq_-rkR?usp=sharing" target="_blank" rel="noopener">Explore the Collection <i class="fas fa-external-link-alt"></i></a></p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>Connect With Us:</p>
+    <div class="social-icons">
+      <a href="https://www.facebook.com/profile.php?id=100088385822088" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/loka_luminary/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.linkedin.com/in/malak-savvyt-t/" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+    </div>
+    <p>&copy; 2025 Dear Future Luminary | Designed by Malak Emad</p>
+  </footer>
+
+  <script>
+    // Back to Top Button
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        document.getElementById("myBtn").style.display = "block";
+      } else {
+        document.getElementById("myBtn").style.display = "none";
+      }
+    }
+
+    function topFunction() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }
+
+    // Theme Toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = themeToggle.querySelector('i');
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+    // Check for saved theme or preferred scheme
+    const currentTheme = localStorage.getItem('theme');
+    if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
+      document.body.setAttribute('data-theme', 'dark');
+      themeIcon.classList.replace('fa-moon', 'fa-sun');
+    }
+
+    // Toggle theme
+    themeToggle.addEventListener('click', () => {
+      const isDark = document.body.getAttribute('data-theme') === 'dark';
+      
+      if (isDark) {
+        document.body.removeAttribute('data-theme');
+        themeIcon.classList.replace('fa-sun', 'fa-moon');
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.body.setAttribute('data-theme', 'dark');
+        themeIcon.classList.replace('fa-moon', 'fa-sun');
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+
+    // Add constellation effect to hero section
+    const hero = document.querySelector('.hero');
+    const starsCount = 50;
+    
+    for (let i = 0; i < starsCount; i++) {
+      const star = document.createElement('div');
+      star.style.position = 'absolute';
+      star.style.width = `${Math.random() * 3}px`;
+      star.style.height = star.style.width;
+      star.style.backgroundColor = 'white';
+      star.style.borderRadius = '50%';
+      star.style.top = `${Math.random() * 100}%`;
+      star.style.left = `${Math.random() * 100}%`;
+      star.style.opacity = Math.random();
+      star.style.animation = `twinkle ${2 + Math.random() * 3}s infinite alternate`;
+      
+      hero.appendChild(star);
+    }
+  </script>
+</body>
+</html>
